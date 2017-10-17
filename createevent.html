@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title></title>
+
+</head>
+<body>
+<div>terwtwert</div>
+
+<script type="text/javascript">
+var z={age:18};
+var readyEvent = document.createEvent('Events');
+    readyEvent.initEvent('WebViewJavascriptBridgeReady',true, true);
+    readyEvent.bridge = z;
+    
+	
+document.addEventListener('WebViewJavascriptBridgeReady', function(){
+	console.log("wwwwwwwwwwwwwwwwwwww")
+}, false);	
+
+document.dispatchEvent(readyEvent);
+</script>
+</body>
+</html>

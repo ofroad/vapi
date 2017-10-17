@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="dns-prefetch" href="//s0.djbstatic.com" />
+<link rel="dns-prefetch" href="//s1.djbstatic.com" />
+<link rel="dns-prefetch" href="//s2.djbstatic.com" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<link rel="icon" type="image/ico" href="http://s0.djbstatic.com/djb-common/images/20120208/favicon.ico" />
+<title></title>
+<meta name="description" content="大家保保险商城是国内领先在线投保平台，一站式导购意外险、旅游险、医疗险、财产险等。网上投保方便可靠，大家保保险商城提供快捷生成保单，在线协助保险理赔服务，咨询电话400-111-4567。" />
+<meta name="keywords" content="大家保,网上买保险,保险" />
+</head>
+<body>
+<div class="test clear">
+	<span class="ta">adfasd</span>
+	<div class="tb">123</div>
+	<div id="wwwwww">afdsfgsdfgdsfgdfhdfgdfghw4twe634564</div>
+</div>
+<script src="src/w2.js"></script>
+<script>
+console.log(window)
+console.log(window.Vcredit)
+//console.log(window.callback_functions);
+
+document.getElementById('wwwwww').addEventListener('click', function(){
+	alert("1236345635")
+}, false);
+
+
+function ready(callback) {
+  // 如果Vcredit已经注入则直接调用
+  if (window.Vcredit) {
+	console.log("========执行分支1========");
+    callback && callback();
+  } else {
+   console.log("========执行分支2========");
+    // 如果没有注入则监听注入的事件
+    document.addEventListener('VcreditReady', callback, false);
+  }
+}
+
+ready(function(){
+	Vcredit.registerLocalFunction("getAge",function(data,callback){
+		console.log("===接收native直接调用h5时native传给h5的data===")
+		console.log(data);
+		callback && callback('测试回传数据...');
+	})
+
+	//模拟native直接调用h5
+	Vcredit.callh5({
+		data:"111",
+		funname:"getAge"
+	});
+
+	//模拟h5调用native
+	Vcredit.call("getname",{age:90});
+});
+</script>
+
+</body>
+</html>
