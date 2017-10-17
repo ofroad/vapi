@@ -6,5 +6,5 @@ define(function(require,exports,module) {
 	console.log(window.vhash)
 	console.log(vsea)
 	console.log(vsea.vhash)
-	vsea.call("getname","",{age:90});
+	vsea.call("getname","  xuexi ",{age:90});
 })

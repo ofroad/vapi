@@ -98,31 +98,31 @@
 				console.log("分支2继续走");
 				//===call(method,source)
 				tool.createCall({
-					method:method,
-					source:source
+					method:method.trim(),
+					source:source.trim()
 				});
 			}else{
-				console.log("分支2参数错误===调用时参数类型错误");
+				console.log("分支2参数错误===调用时参数类型错误或者参数不能为空字符串");
 			}
 		}
 		//情况3:由于前2个参数是必填,只传三个参数,则第一个参数是method,第二个参数是source,第三个参数是data或者callback
 		if(arguments.length===3){
 			console.log("分支3");
-			if(typeof method==="string"&&typeof source==="string"&&tool.getType(data) ==="[object Object]"){
+			if(typeof method==="string"&&typeof source==="string"&&tool.getType(data) ==="[object Object]"&&method.trim().length!==0&&source.trim().length!==0){
 				console.log("分支3-1继续走");
 				//===call(method,source,data)
 				tool.createCall({
-					method:method,
-					source:source,
+					method:method.trim(),
+					source:source.trim(),
 					data:data
 				});
-			}else if(typeof method==="string"&&typeof source==="string"&&tool.getType(data) ==="[object Function]"){
+			}else if(typeof method==="string"&&typeof source==="string"&&tool.getType(data) ==="[object Function]"&&method.trim().length!==0&&source.trim().length!==0){
 				console.log("分支3-2继续走");
 				//===call(method,source,callback)
 				//此时第三个参数data就是callback
 				tool.createCall({
-					method:method,
-					source:source
+					method:method.trim(),
+					source:source.trim()
 				},data);
 			}else{
 				console.log("分支3参数错误===");
@@ -131,13 +131,13 @@
 		//情况4:由于前2个参数是必填, 传四个参数代表全传
 		if(arguments.length===4){
 			console.log("====传了4个参数===");
-			if(typeof method==="string"&&typeof source==="string"&&tool.getType(data) ==="[object Object]"&&tool.getType(callback) ==="[object Function]"){
+			if(typeof method==="string"&&typeof source==="string"&&tool.getType(data) ==="[object Object]"&&tool.getType(callback) ==="[object Function]"&&method.trim().length!==0&&source.trim().length!==0){
 				console.log("分支4");
 				console.log("分支4继续走");
 				//===call(method,source,data,callback)
 				tool.createCall({
-					method:method,
-					source:source,
+					method:method.trim(),
+					source:source.trim(),
 					data:data
 				},callback);
 			}else{
