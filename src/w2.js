@@ -8,7 +8,6 @@
 		return;
 	}
 	var custom_scheme="vcredit",//jsbridge协议定义的名称
-		custom_host="elearning",//jsbridge协议定义的host
 		callback_initid=1,//回调函数初始化ID
 		callback_functions={},//定义的回调函数集合,可以通过回调函数ID查找得到回调函数
 		localh5_functions={},//存放本地注册的方法集合,原生只能调用本地注册过的方法
@@ -24,24 +23,27 @@
 			return "cbid_"+(callback_initid++)+"_"+Date.now();
 		},
 		getUrl:function(message){
-			var url=custom_scheme+"://"+custom_host+"/",callbackid,method,params;
+			var url=custom_scheme+"://",callbackid,method,source,params;
 			callbackid=message.callbackId;
 			method=message.method;
+			source=message.source;
 			params=message.data;
-			url+=method+"/"+callbackid+"?"+JSON.stringify(params);
+			url+=source+"/"+method+"/"+callbackid+"?"+JSON.stringify(params);
 			return url;
 		},
 		createCall:function(message,callback){
 			/**
 			*创建iframe发起请求
-			*message  json对象	调用的方法详情,包括方法名,传递的数据
+			*message  json对象	调用的方法详情,包括方法名,传递的数据,请求来源
 			*callback 函数类型	native方法执行完后的回调方法
 			*/
 			console.log("message===",message)
+			console.log(callback)
 			//没有回调的情况下
 			message['callbackId']="nocallback";
 			if(callback&&typeof callback==="function"){
 				//有回调
+				console.log("========有回调=========")
 				var callbackid=tool.getCallbackId();
 				callback_functions[callbackid]=callback;
 				message['callbackId']=callbackid;
@@ -71,11 +73,12 @@
 	};
 
 	//h5调用native的功能
-	function call(method,data,callback){
+	function call(method,source,data,callback){
 		/**
-		*method   字符串类型	方法名
-		*data	  json对象	    传递的数据
-		*callback 函数类型 	    native方法执行完后的回调方法
+		*method   字符串类型	方法名  必填项
+		*source   字符串类型	项目名,用来标记请求来源,必填项
+		*data	  json对象	    传递的数据,非必填项
+		*callback 函数类型 	    native方法执行完后的回调方法,非必填项
 		*/
 		console.log(method)
 		console.log(data)
@@ -83,56 +86,64 @@
 		console.log("实参长度arguments.length==",arguments.length);//实参长度
 		console.log("形参长度arguments.callee.length==",arguments.callee.length);//形参长度
 		//===vcredit://elearning/getuser/1253452?a=3&b=www
-		//情况1:只传一个参数,此参数应该是method
+		//情况1:由于前2个参数是必填,只传一个参数属于不正确的调用,只给调试提示，不产生调用
 		if(arguments.length===1){
 			console.log("分支1");
-			if(typeof method==="string"){
-				console.log("分支1继续走");
-				//===call(method)
-				tool.createCall({
-					method:method
-				});
-			}else{
-				console.log("分支1参数错误");
-			}
+			console.log("分支1参数错误===调用时不能只传一个参数");
 		}
-		//情况2:只传两个参数,则第一个参数是method,第二个参数是data或者callback
+		//情况2:由于前2个参数是必填,只传两个参数,则第一个参数是method,第二个参数是source,其他情况属于不正确的调用,只给调试提示，不产生调用
 		if(arguments.length===2){
 			console.log("分支2");
-			if(typeof method==="string"&&tool.getType(data) ==="[object Object]"){
-				console.log("分支2-1继续走");
-				//===call(method,data)
+			if(typeof method==="string"&&typeof source==="string"&&method.trim().length!==0&&source.trim().length!==0){
+				console.log("分支2继续走");
+				//===call(method,source)
 				tool.createCall({
 					method:method,
-					data:data
+					source:source
 				});
-			}else if(typeof method==="string"&&tool.getType(data) ==="[object Function]"){
-				console.log("分支2-2继续走");
-				//===call(method,callback)
-				callback=data;
-				data = null;
-				tool.createCall({
-					method:method
-				},callback);
 			}else{
-				console.log("分支2参数错误");
+				console.log("分支2参数错误===调用时参数类型错误");
 			}
 		}
-		//情况3:只传三个参数,则第一个参数是method,第二个参数是data,第二个参数是callback
+		//情况3:由于前2个参数是必填,只传三个参数,则第一个参数是method,第二个参数是source,第三个参数是data或者callback
 		if(arguments.length===3){
 			console.log("分支3");
-			if(typeof method==="string"&&tool.getType(data) ==="[object Object]"&&tool.getType(callback) ==="[object Function]"){
-				console.log("分支3继续走");
-				//===call(method,data,callback)
+			if(typeof method==="string"&&typeof source==="string"&&tool.getType(data) ==="[object Object]"){
+				console.log("分支3-1继续走");
+				//===call(method,source,data)
 				tool.createCall({
 					method:method,
+					source:source,
+					data:data
+				});
+			}else if(typeof method==="string"&&typeof source==="string"&&tool.getType(data) ==="[object Function]"){
+				console.log("分支3-2继续走");
+				//===call(method,source,callback)
+				//此时第三个参数data就是callback
+				tool.createCall({
+					method:method,
+					source:source
+				},data);
+			}else{
+				console.log("分支3参数错误===");
+			}
+		}
+		//情况4:由于前2个参数是必填, 传四个参数代表全传
+		if(arguments.length===4){
+			console.log("====传了4个参数===");
+			if(typeof method==="string"&&typeof source==="string"&&tool.getType(data) ==="[object Object]"&&tool.getType(callback) ==="[object Function]"){
+				console.log("分支4");
+				console.log("分支4继续走");
+				//===call(method,source,data,callback)
+				tool.createCall({
+					method:method,
+					source:source,
 					data:data
 				},callback);
 			}else{
-				console.log("分支3参数错误");
+				console.log("分支4参数错误===");
 			}
 		}
-		
 	}
 	
 	//native调用h5的方法

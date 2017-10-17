@@ -18,7 +18,7 @@
 	<div class="tb">123</div>
 	<div id="wwwwww">afdsfgsdfgdsfgdfhdfgdfghw4twe634564</div>
 </div>
-<script src="src/w2.js"></script>
+
 <script>
 console.log(window)
 console.log(window.Vcredit)
@@ -42,6 +42,7 @@ function ready(callback) {
 }
 
 ready(function(){
+	/*
 	Vcredit.registerLocalFunction("getAge",function(data,callback){
 		console.log("===接收native直接调用h5时native传给h5的data===")
 		console.log(data);
@@ -53,11 +54,11 @@ ready(function(){
 		data:"111",
 		funname:"getAge"
 	});
-
+    */
 	//模拟h5调用native
-	Vcredit.call("getname",{age:90});
+	Vcredit.call("getname","");
 });
 </script>
-
+<script src="src/w2.js"></script>
 </body>
 </html>

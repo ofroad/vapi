@@ -15,7 +15,7 @@ require(['apitest'], function(z) {
 	console.log(window.vhash)
 	console.log(z)
 	console.log(z.vhash)
-	z.call("getname",{age:90});
+	z.call("getname","learning");
 
 });
 
