@@ -3,6 +3,14 @@
 	//var win=window,doc=document;
 	//console.log(win);
 	//console.log(doc);
+	if(!navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)){	
+		console.log("=========pc端=========");
+		//如果当前环境是pc端,则此功能失效
+		return;
+	}
+	/*如果不在维信金科app下,则此功能失效
+	if()
+	*/
 	if(window.vcredit){
 		//如果window已经定义了vcredit对象，不用重新加载
 		return;
