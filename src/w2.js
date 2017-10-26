@@ -3,11 +3,13 @@
 	//var win=window,doc=document;
 	//console.log(win);
 	//console.log(doc);
+	/*
 	if(!navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)){	
 		console.log("=========pc端=========");
 		//如果当前环境是pc端,则此功能失效
 		return;
 	}
+	*/
 	/*如果不在维信金科app下,则此功能失效
 	if()
 	*/
@@ -19,7 +21,7 @@
 		callback_initid=1,//回调函数初始化ID
 		callback_functions={},//定义的回调函数集合,可以通过回调函数ID查找得到回调函数
 		localh5_functions={},//存放本地注册的方法集合,原生只能调用本地注册过的方法
-		version="0.1"+"_"+Date.now();
+		version="0.1.1";
 		
 	//console.log(custom_scheme);
 	var tool={
@@ -225,7 +227,7 @@
 		}
 		if(callbackid!=="nocallback"){
 			msg.callbackid=callbackid;
-			msg.reponsedata="我是执行native功能后执行回调的数据"
+			msg.reponsedata="我是执行native功能后执行回调的数据!!!!!!!!!!!!!!"
 			//通过callh5执行回调
 			console.log("msg==",msg);
 			callh5(msg);

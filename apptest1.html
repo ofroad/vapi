@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<title>native toast功能调用</title>
+<style>
+*{margin:0; padding:0;}
+body{font-size:16px; color:#ff0000;}
+.box{padding:50px; text-align:center;}
+.btn-a{display:inline-block; padding:10px; border:2px solid #ff0000; border-radius:10px;}
+</style>
+</head>
+<body>
+<div class="box">
+	<span id="calltoast" class="btn-a">h5调用native toast</span>
+</div>
+<div id="msg"></div>
+<script>
+//console.log(window)
+//console.log(window.Vcredit)
+//console.log(window.callback_functions);
+function ready(callback) {
+  // 如果Vcredit已经注入则直接调用
+  if (window.Vcredit) {
+	console.log("========执行分支1========");
+    callback && callback();
+  } else {
+   console.log("========执行分支2========");
+    // 如果没有注入则监听注入的事件
+    document.addEventListener('VcreditReady', callback, false);
+  }
+}
+
+ready(function(){
+	//模拟h5调用native
+	document.getElementById('calltoast').addEventListener('click', function(){
+		//alert("1236345635")
+		Vcredit.call(" getname   "," fasd ",{a:1},function(data){
+			console.log("===========native执行完成后的回调给h5的数据=============");
+			document.getElementById('msg').innerHTML=data;
+			console.log(data);
+		});
+	}, false);
+	
+});
+</script>
+<script src="src/w2.js"></script>
+</body>
+</html>
+
