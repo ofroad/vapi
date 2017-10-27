@@ -155,7 +155,8 @@
 			}
 		}
 	}
-	
+	//alert("11111111111111111");
+	//document.getElementById('msg2').innerHTML="我来自w2";
 	//native调用h5的方法
 	function callh5(message){
 		/**
@@ -163,10 +164,16 @@
 		*{callbackid,reponsedata}
 		*{funname,data}
 		*/
+		//alert("wwwwwwwwwwwwwwwwww");
+		document.getElementById('msg2').innerHTML=message;
+		document.getElementById('msg3').innerHTML=JSON.parse(message).name;
+		//var msg=typeof message==="string"?JSON.parse(message):message;
+		//var msg=JSON.parse(message);
 		
-		var msg=typeof message==="string"?JSON.parse(message):message;
+		/*
 		var callback=null;
 		if(msg.callbackid){
+			document.getElementById('msg5').innerHTML="此时是h5调用native且有回调的情况下去执行回调";
 			console.log("===native开始执行回调===");
 			//此时是h5调用native且有回调的情况下去执行回调
 			console.log("======此时是h5调用native且有回调的情况下去执行回调=====");
@@ -174,12 +181,15 @@
 			if(!callback){
 				//没找到回调id对应的回调方法就返回
 				console.log("没找到回调id对应的回调方法");
+				document.getElementById('msg4').innerHTML="没找到回调id对应的回调方法";
 				return;
 			}
+			document.getElementById('msg6').innerHTML="开始执行回调";
 			callback(msg.reponsedata);
 			//回调执行完后被删除
 			delete callback_functions[msg.callbackid];
 		}else{
+			document.getElementById('msg7').innerHTML="此时是native直接调用h5本地的函数";
 			//此时是native直接调用h5本地的函数====有执行回调但未实现通知native
 			console.log("======native直接调用h5本地的函数=====");
 			console.log("msg===",msg);
@@ -195,6 +205,7 @@
 				console.log("==============本地没有注册此函数,调用失败================")
 			}
 		}
+		*/
 		
 	}
 	

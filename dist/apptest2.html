@@ -13,15 +13,13 @@ body{font-size:16px; color:#ff0000;}
 .box{padding:50px; text-align:center;}
 .btn-a{display:inline-block; padding:10px; border:2px solid #ff0000; border-radius:10px;}
 </style>
-<script src="src/w2.js"></script>
 </head>
 <body>
 <div class="box">
-	<span id="calltoast" class="btn-a">h5调用native toast3</span>
+	<span id="calltoast" class="btn-a">h5调用native toast2</span>
 </div>
 <div id="msg"></div>
-参数：<div id="msg2"></div>
-
+<script src="src/w2.js"></script>
 <script>
 //console.log(window)
 //console.log(window.Vcredit)
@@ -42,9 +40,8 @@ ready(function(){
 	//模拟h5调用native
 	document.getElementById('calltoast').addEventListener('click', function(){
 		//alert("1236345635")
-		Vcredit.call(" showToast   "," elearning ",{content:"我是www6345634---toast",showTime:8000},function(data){
+		Vcredit.call(" showToast   "," elearning ",{content:"我是www---toast",showTime:3000},function(data){
 			console.log("===========native执行完成后的回调给h5的数据=============");
-			alert(data)
 			document.getElementById('msg').innerHTML=data;
 			console.log(data);
 		});
