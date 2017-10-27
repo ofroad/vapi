@@ -41,7 +41,7 @@ ready(function(){
 	//模拟h5调用native
 	document.getElementById('calltoast').addEventListener('click', function(){
 		//alert("1236345635")
-		Vcredit.call(" getname   "," fasd ",{a:1},function(data){
+		Vcredit.call(" showToast   "," elearning ",{content:"我是www3333---toast",showTime:3000},function(data){
 			console.log("===========native执行完成后的回调给h5的数据=============");
 			document.getElementById('msg').innerHTML=data;
 			console.log(data);

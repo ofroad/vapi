@@ -78,7 +78,7 @@
             }, 100);
 			
 			//分析url模拟原生调用h5
-			resolveUrl(url);
+			//resolveUrl(url);
 		}
 	};
 

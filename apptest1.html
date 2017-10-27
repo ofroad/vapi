@@ -36,10 +36,23 @@ function ready(callback) {
 }
 
 ready(function(){
+	/*
+	Vcredit.registerLocalFunction("getAge",function(data,callback){
+		console.log("===接收native直接调用h5时native传给h5的data===")
+		console.log(data);
+		callback && callback('测试回传数据...');
+	})
+
+	//模拟native直接调用h5
+	Vcredit.callh5({
+		data:"111",
+		funname:"getAge"
+	});
+    */
 	//模拟h5调用native
 	document.getElementById('calltoast').addEventListener('click', function(){
 		//alert("1236345635")
-		Vcredit.call(" getname   "," fasd ",{a:1},function(data){
+		Vcredit.call(" showToast   "," elearning ",{content:"我是www---toast",showTime:3000},function(data){
 			console.log("===========native执行完成后的回调给h5的数据=============");
 			document.getElementById('msg').innerHTML=data;
 			console.log(data);
