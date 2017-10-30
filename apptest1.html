@@ -19,8 +19,8 @@ body{font-size:16px; color:#ff0000;}
 <div class="box">
 	<span id="calltoast" class="btn-a">h5调用native toast111</span>
 </div>
-参数1：<div id="msg"></div>
-参数2：<div id="msg2"></div>
+成功执行回调后返回的reponsedata：<div id="msg"></div>
+成功执行回调后返回的原始数据：<div id="msg2"></div>
 参数3：<div id="msg3"></div>
 参数4：<div id="msg4"></div>
 参数5：<div id="msg5"></div>
@@ -46,35 +46,21 @@ function ready(callback) {
     document.addEventListener('VcreditReady', callback, false);
   }
 }
-
+document.getElementById('msg7').innerHTML=navigator.userAgent;
 ready(function(){
-	/*
-	Vcredit.registerLocalFunction("getAge",function(data,callback){
-		console.log("===接收native直接调用h5时native传给h5的data===")
-		console.log(data);
-		callback && callback('测试回传数据...');
-	})
-	
-	//模拟native直接调用h5
-	Vcredit.callh5({
-		data:"111",
-		funname:"getAge"
-	});
-    */
 	//模拟h5调用native
 	document.getElementById('calltoast').addEventListener('click', function(){
 		//alert("1236345635")
-		Vcredit.call(" showToast   "," elearning ",{content:"我是www---toast--11111111111111",showTime:3000},function(data){
+		Vcredit.call(" showToast   "," elearning ",{content:"我是www---toast--2354",showTime:3000},function(data){
 			console.log("===========native执行完成后的回调给h5的数据=============");
-			//alert(data);
-			document.getElementById('msg').innerHTML="我是在执行h5调native的回调";
-			//console.log(data);
+			//回调执行成功的话，会在参数1中写入reponsedata
+			document.getElementById('msg').innerHTML=JSON.stringify(data);
 		});
 	}, false);
 	
 });
 </script>
-<script src="src/w2.js?v=11zzccxs4123"></script>
+<script src="src/w2.js?v=23477dgf"></script>
 </body>
 </html>
 

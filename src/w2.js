@@ -166,11 +166,23 @@
 		*/
 		//alert("wwwwwwwwwwwwwwwwww");
 		document.getElementById('msg2').innerHTML=message;
-		document.getElementById('msg3').innerHTML=JSON.parse(message).name;
-		//var msg=typeof message==="string"?JSON.parse(message):message;
+		//document.getElementById('msg3').innerHTML=JSON.parse(message).name;
+		/*
+		if(typeof message==="string"){
+			//document.getElementById('msg3').innerHTML="字符串"
+			try{
+				document.getElementById('msg3').innerHTML=JSON.parse(message).reponsedata.name;
+			}catch(e){
+				document.getElementById('msg3').innerHTML="json不合法";
+			}
+		}else if(typeof message==="object"){
+			document.getElementById('msg3').innerHTML="对象"
+		}
+		*/
+		var msg=typeof message==="string"?JSON.parse(message):message;
 		//var msg=JSON.parse(message);
 		
-		/*
+		
 		var callback=null;
 		if(msg.callbackid){
 			document.getElementById('msg5').innerHTML="此时是h5调用native且有回调的情况下去执行回调";
@@ -205,7 +217,7 @@
 				console.log("==============本地没有注册此函数,调用失败================")
 			}
 		}
-		*/
+		
 		
 	}
 	
