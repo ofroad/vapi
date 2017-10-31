@@ -229,6 +229,7 @@
 	}
 	
 	//模拟h5调用原生
+	/*
 	function resolveUrl(url){
 		var a=url.split("//")[1].split("?");
 		//console.log(a);
@@ -262,6 +263,7 @@
 		
 		
 	}
+	*/
 	//resolveUrl("vcredit://elearning/getuser/nocallback?{}")
 	
 	
