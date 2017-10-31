@@ -10,13 +10,14 @@
 		return;
 	}
 	*/
-	/*如果不在维信金科app下,则此功能失效
+	/*如果不在维信金科app下,则此功能失效--目前其ua特征未知
 	if()
 	*/
-	if(window.vcredit){
-		//如果window已经定义了vcredit对象，不用重新加载
+	//如果window已经定义了vcredit对象，不用重新加载
+	if(window.Vcredit){
 		return;
 	}
+	
 	var custom_scheme="vcredit",//jsbridge协议定义的名称
 		callback_initid=1,//回调函数初始化ID
 		callback_functions={},//定义的回调函数集合,可以通过回调函数ID查找得到回调函数
