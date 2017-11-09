@@ -49,18 +49,20 @@ function ready(callback) {
 document.getElementById('msg7').innerHTML=navigator.userAgent;
 ready(function(){
 	//模拟h5调用native
+	//document.getElementById('msg7').innerHTML="执行回调了";
 	document.getElementById('calltoast').addEventListener('click', function(){
 		//alert("1236345635")
 		Vcredit.call(" showToast   "," elearning ",{content:"我是www---toast--2354",showTime:3000},function(data){
 			console.log("===========native执行完成后的回调给h5的数据=============");
 			//回调执行成功的话，会在参数1中写入reponsedata
-			document.getElementById('msg').innerHTML=JSON.stringify(data);
+			//document.getElementById('msg').innerHTML=JSON.stringify(data);
+			document.getElementById('msg').innerHTML=data.age;
 		});
 	}, false);
 	
 });
 </script>
-<script src="src/w2.js?v=23477dgf"></script>
+<script src="src/w3.js?v=dd23477dgf"></script>
 </body>
 </html>
 
